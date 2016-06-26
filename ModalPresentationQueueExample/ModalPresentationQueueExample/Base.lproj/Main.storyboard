@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="E6t-Uk-Ry5">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="IBb-8i-pfR">
+            <objects>
+                <viewController id="E6t-Uk-Ry5" customClass="ViewController" customModule="ModalPresentationQueueExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iXn-ZU-FU2"/>
+                        <viewControllerLayoutGuide type="bottom" id="4yB-DI-zzW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fXS-w0-qGL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bDV-IP-phx">
+                                <rect key="frame" x="-55" y="250" width="250" height="69"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="F76-GA-m71">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="29"/>
+                                        <subviews>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fIA-yc-mNc">
+                                                <rect key="frame" x="0.0" y="0.0" width="94" height="29"/>
+                                                <connections>
+                                                    <action selector="updateNumberOfAlerts:" destination="E6t-Uk-Ry5" eventType="valueChanged" id="6xx-x4-3hU"/>
+                                                </connections>
+                                            </stepper>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Number of alerts: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qJ-xy-Gq8">
+                                                <rect key="frame" x="104" y="0.0" width="146" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGb-FR-lEh">
+                                        <rect key="frame" x="0.0" y="39" width="250" height="30"/>
+                                        <state key="normal" title="Present"/>
+                                        <connections>
+                                            <action selector="presentAlerts:" destination="E6t-Uk-Ry5" eventType="touchUpInside" id="Lkc-O9-zL1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bDV-IP-phx" firstAttribute="centerX" secondItem="fXS-w0-qGL" secondAttribute="centerX" id="poL-pF-8YT"/>
+                            <constraint firstItem="bDV-IP-phx" firstAttribute="centerY" secondItem="fXS-w0-qGL" secondAttribute="centerY" id="yx7-FN-oui"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="6qJ-xy-Gq8" id="a8C-dd-Fbf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F2J-Cz-otM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96.711111111111109" y="323.07208888888886"/>
+        </scene>
+    </scenes>
+</document>
