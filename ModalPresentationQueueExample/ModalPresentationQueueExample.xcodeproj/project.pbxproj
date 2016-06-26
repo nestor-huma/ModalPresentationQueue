@@ -12,7 +12,7 @@
 		8E61D4A01D204FD2000F2AD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E61D49E1D204FD2000F2AD0 /* Main.storyboard */; };
 		8E61D4A21D204FD2000F2AD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E61D4A11D204FD2000F2AD0 /* Assets.xcassets */; };
 		8E61D4A51D204FD2000F2AD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E61D4A31D204FD2000F2AD0 /* LaunchScreen.storyboard */; };
-		8E61D4AE1D205043000F2AD0 /* UIViewController+ModalPresentationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E61D4AD1D205043000F2AD0 /* UIViewController+ModalPresentationQueue.swift */; };
+		8E61D4B11D205228000F2AD0 /* UIViewController+ModalPresentationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E61D4B01D205228000F2AD0 /* UIViewController+ModalPresentationQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		8E61D4A11D204FD2000F2AD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E61D4A41D204FD2000F2AD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E61D4A61D204FD2000F2AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E61D4AD1D205043000F2AD0 /* UIViewController+ModalPresentationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ModalPresentationQueue.swift"; sourceTree = "<group>"; };
+		8E61D4B01D205228000F2AD0 /* UIViewController+ModalPresentationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ModalPresentationQueue.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,7 @@
 		8E61D48E1D204FD2000F2AD0 = {
 			isa = PBXGroup;
 			children = (
-				8E61D4AC1D205043000F2AD0 /* ModalPresentationQueue */,
+				8E61D4AF1D205228000F2AD0 /* ModalPresentationQueue */,
 				8E61D4991D204FD2000F2AD0 /* ModalPresentationQueueExample */,
 				8E61D4981D204FD2000F2AD0 /* Products */,
 			);
@@ -67,12 +67,13 @@
 			path = ModalPresentationQueueExample;
 			sourceTree = "<group>";
 		};
-		8E61D4AC1D205043000F2AD0 /* ModalPresentationQueue */ = {
+		8E61D4AF1D205228000F2AD0 /* ModalPresentationQueue */ = {
 			isa = PBXGroup;
 			children = (
-				8E61D4AD1D205043000F2AD0 /* UIViewController+ModalPresentationQueue.swift */,
+				8E61D4B01D205228000F2AD0 /* UIViewController+ModalPresentationQueue.swift */,
 			);
-			path = ModalPresentationQueue;
+			name = ModalPresentationQueue;
+			path = ../ModalPresentationQueue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E61D49D1D204FD2000F2AD0 /* ViewController.swift in Sources */,
-				8E61D4AE1D205043000F2AD0 /* UIViewController+ModalPresentationQueue.swift in Sources */,
+				8E61D4B11D205228000F2AD0 /* UIViewController+ModalPresentationQueue.swift in Sources */,
 				8E61D49B1D204FD2000F2AD0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
