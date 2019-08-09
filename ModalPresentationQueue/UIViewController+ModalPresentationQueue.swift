@@ -28,23 +28,23 @@ public extension UIViewController {
     func addViewControllerToPresentationQueue(viewControllerToPresent: UIViewController, animated: Bool = true, completion: Action? = nil) {
         
         // Create new block operation
-        let newOperation = NSBlockOperation {
-            let semaphore = dispatch_semaphore_create(0)
+        let newOperation = BlockOperation {
+            let semaphore = DispatchSemaphore(value: 0)
             
             // Set view controller's dismissal completion in order to get notified when it will be dismissed
             viewControllerToPresent.dismissCompletion = {
-                dispatch_semaphore_signal(semaphore)
+                semaphore.signal()
             }
             
             // Present view controller in main queue
-            NSOperationQueue.mainQueue().addOperationWithBlock{
-                self.presentViewController(viewControllerToPresent, animated: animated, completion: completion)
+            OperationQueue.main.addOperation {
+                self.present(viewControllerToPresent, animated: animated, completion: completion)
             }
             
             // Wait until view controller will be dismissed
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+            _ = semaphore.wait(timeout: .distantFuture)
         }
-        newOperation.queuePriority = .VeryHigh
+        newOperation.queuePriority = .veryHigh
         
         // Make sure that new operation won't start until all previous operations will finish
         if let lastOperation = presentationQueue.operations.last {
@@ -64,16 +64,11 @@ public extension UIViewController {
     /**
      Queue of view controllers.
      */
-    private var presentationQueue: NSOperationQueue {
+    private var presentationQueue: OperationQueue {
         struct Static {
-            static var onceToken: dispatch_once_t = 0
+            static let presentationQueue = OperationQueue()
         }
-        
-        dispatch_once(&Static.onceToken) {
-            let presentationQueue = NSOperationQueue()
-            objc_setAssociatedObject(self, &AssociatedKeys.PresentationQueueName, presentationQueue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-        return objc_getAssociatedObject(self, &AssociatedKeys.PresentationQueueName) as! NSOperationQueue
+        return Static.presentationQueue
     }
     
 }
@@ -116,40 +111,24 @@ extension UIViewController {
     }
     
     // MARK: method swizzling
-    public override class func initialize() {
-        struct Static {
-            static var token: dispatch_once_t = 0
-        }
-        
-        // make sure this isn't a subclass
-        if self !== UIViewController.self {
-            return
-        }
-        
-        // Replace viewWillDissappear with np_viewWillDissappear
-        dispatch_once(&Static.token) {
-            let originalSelector = #selector(UIViewController.viewDidDisappear(_:))
-            let swizzledSelector = #selector(UIViewController.np_viewDidDisappear(_:))
-            
-            let originalMethod = class_getInstanceMethod(self, originalSelector)
-            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
-            
-            let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
-            
-            if didAddMethod {
-                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
-            } else {
-                method_exchangeImplementations(originalMethod, swizzledMethod)
+    static func swizzleViewDidDisappear() {
+        //Make sure This isn't a subclass of UIViewController, So that It applies to all UIViewController childs
+            if self != UIViewController.self {
+                return
             }
-        }
+            let originalSelector = #selector(UIViewController.viewWillDisappear(_:))
+            let swizzledSelector = #selector(UIViewController.np_viewDidDisappear(_:))
+            guard let originalMethod = class_getInstanceMethod(self, originalSelector),
+                let swizzledMethod = class_getInstanceMethod(self, swizzledSelector) else { return }
+            method_exchangeImplementations(originalMethod, swizzledMethod)
     }
     
     /**
      Swizzled viewWillDisappear.
      */
-    @objc private func np_viewDidDisappear(animated: Bool) {
+    @objc private func np_viewDidDisappear(_ animated: Bool) {
         self.np_viewDidDisappear(animated)
-        if isBeingDismissed() {
+        if isBeingDismissed {
             dismissCompletion?()
         }
     }

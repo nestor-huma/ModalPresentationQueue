@@ -23,20 +23,21 @@ class ViewController: UIViewController {
         numberOfAlerts = 1
     }
     
-    @IBAction private func updateNumberOfAlerts(sender: UIStepper) {
+    @IBAction private func updateNumberOfAlerts(_ sender: UIStepper) {
         numberOfAlerts = Int(sender.value)
     }
     
-    @IBAction private func presentAlerts(sender: AnyObject) {
+    @IBAction private func presentAlerts(_ sender: Any) {
         for index in 0..<numberOfAlerts {
             let alert = createAlert(number: index + 1, total: numberOfAlerts)
-            addViewControllerToPresentationQueue(alert)
+            addViewControllerToPresentationQueue(viewControllerToPresent: alert)
         }
     }
     
-    private func createAlert(number number: Int, total: Int) -> UIAlertController {
-        let alert = UIAlertController(title: "Alert \(number)/\(total)", message: "What's up?", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Nothing", style: .Default, handler: nil))
+    
+    private func createAlert(number: Int, total: Int) -> UIAlertController {
+        let alert = UIAlertController(title: "Alert \(number)/\(total)", message: "What's up?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Nothing", style: .default, handler: nil))
         return alert
     }
     

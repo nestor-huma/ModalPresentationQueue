@@ -20,7 +20,11 @@ Code from the example project:
 Please check out the example project to see this extension in action.
 
 #Installation
-Just add **UIViewController+ModalPresentationQueue.swift** to your project.
+Add **UIViewController+ModalPresentationQueue.swift** to your project.
+Add line to your **AppDelegate.Swift**:
+```Swift
+UIViewController.swizzleViewDidDisappear()
+```
 
 
 #License
