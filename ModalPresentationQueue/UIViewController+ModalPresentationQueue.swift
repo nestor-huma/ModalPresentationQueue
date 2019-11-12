@@ -116,7 +116,7 @@ extension UIViewController {
             if self != UIViewController.self {
                 return
             }
-            let originalSelector = #selector(UIViewController.viewWillDisappear(_:))
+            let originalSelector = #selector(UIViewController.viewDidDisappear(_:))
             let swizzledSelector = #selector(UIViewController.np_viewDidDisappear(_:))
             guard let originalMethod = class_getInstanceMethod(self, originalSelector),
                 let swizzledMethod = class_getInstanceMethod(self, swizzledSelector) else { return }
